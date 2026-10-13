@@ -1,0 +1,33 @@
+<h1>Photos</h1>
+
+<%= form_for routes.path(:photos), class: "upload-form" do |f| %>
+  <p>
+    <label for="photo-image">Photo</label>
+    <%= attachment_field f, "photo.image", attachment: image, uploader: Shoebox::Uploaders::ImageUploader, id: "photo-image" %>
+    <% if image&.cached_data %><small>Your photo is kept; save again or pick another.</small><% end %>
+  </p>
+  <p>
+    <label for="photo-title">Caption</label>
+    <%= f.text_field "photo.title", id: "photo-title", maxlength: 200 %>
+  </p>
+  <p><%= f.submit "Add photo" %></p>
+<% end %>
+
+<% if photos.empty? %>
+  <p class="empty">No photos yet.</p>
+<% else %>
+  <ul class="grid">
+    <% photos.each do |photo| %>
+      <li id="photo-<%= photo.id %>">
+        <a href="<%= attachment_url(photo.image) %>">
+          <img src="<%= attachment_url(photo.image(:thumb) || photo.image) %>" alt="<%= photo.title %>"
+               width="<%= photo.image.width %>" height="<%= photo.image.height %>">
+        </a>
+        <p><%= photo.title %></p>
+        <%= form_for routes.path(:photo, id: photo.id), method: :delete, data: {turbo_confirm: "Delete this photo?"} do |f| %>
+          <%= f.submit "Delete", class: "link" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

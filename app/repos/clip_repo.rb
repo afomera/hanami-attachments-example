@@ -11,6 +11,18 @@ module Shoebox
         clips.order { created_at.desc }.to_a
       end
 
+      def for_user(user_id)
+        clips.where(user_id:).order { id.desc }.to_a
+      end
+
+      def find_for_user(id, user_id)
+        clips.where(id:, user_id:).one
+      end
+
+      def delete(id)
+        clips.by_pk(id).delete
+      end
+
       def create(attributes)
         clips.changeset(:create, attributes).commit
       end

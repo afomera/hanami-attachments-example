@@ -11,6 +11,18 @@ module Shoebox
         photos.order { created_at.desc }.to_a
       end
 
+      def for_user(user_id)
+        photos.where(user_id:).order { id.desc }.to_a
+      end
+
+      def find_for_user(id, user_id)
+        photos.where(id:, user_id:).one
+      end
+
+      def delete(id)
+        photos.by_pk(id).delete
+      end
+
       def create(attributes)
         photos.changeset(:create, attributes).commit
       end

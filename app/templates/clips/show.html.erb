@@ -1,0 +1,10 @@
+<p><a href="<%= routes.path(:clips) %>">← Clips</a></p>
+
+<h1><%= clip.title %></h1>
+
+<video src="<%= attachment_url(clip.video) %>" controls preload="metadata" width="640"></video>
+
+<p>
+  <%= clip.video.original_filename %> · <%= clip.video.mime_type %> · <%= Hanami::Attachments.format_size(clip.video.size) %>
+  · <a href="<%= attachment_url(clip.video, download: true) %>" data-turbo="false">Download</a>
+</p>

@@ -6,6 +6,8 @@ module Shoebox
       schema :users, infer: true do
         associations do
           has_many :sessions
+          has_many :photos
+          has_many :clips
         end
       end
     end

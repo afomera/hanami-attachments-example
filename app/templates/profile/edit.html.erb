@@ -1,0 +1,19 @@
+<h1>Your profile</h1>
+
+<p class="avatar-large">
+  <img src="<%= attachment_url(user.avatar(:thumb), fallback: "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==") %>"
+       alt="" width="120" height="120">
+</p>
+
+<%= form_for routes.path(:profile), method: :patch, class: "upload-form" do |f| %>
+  <p>
+    <label for="user-avatar">Avatar</label>
+    <%= attachment_field f, "user.avatar", attachment: avatar, uploader: Shoebox::Uploaders::AvatarUploader, id: "user-avatar" %>
+  </p>
+  <% if user.avatar %>
+    <p>
+      <label><%= f.check_box "user.remove_avatar" %> Remove my avatar</label>
+    </p>
+  <% end %>
+  <p><%= f.submit "Save" %></p>
+<% end %>

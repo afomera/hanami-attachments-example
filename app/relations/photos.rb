@@ -3,7 +3,11 @@
 module Shoebox
   module Relations
     class Photos < Shoebox::DB::Relation
-      schema :photos, infer: true
+      schema :photos, infer: true do
+        associations do
+          belongs_to :user
+        end
+      end
     end
   end
 end

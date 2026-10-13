@@ -6,10 +6,33 @@
     <title>Shoebox</title>
     <%= favicon_tag %>
     <%= stylesheet_tag "app" %>
+    <%= javascript_tag "app", defer: true %>
     <%= content_for :head %>
   </head>
   <body>
-    <%= yield %>
-    <%= javascript_tag "app" %>
+    <header class="site-header">
+      <a class="brand" href="<%= routes.path(:root) %>">Shoebox</a>
+      <% if authenticated? %>
+        <nav>
+          <a href="<%= routes.path(:photos) %>">Photos</a>
+          <a href="<%= routes.path(:clips) %>">Clips</a>
+          <a class="me" href="<%= routes.path(:edit_profile) %>">
+            <% if current_user.avatar %><img src="<%= attachment_url(current_user.avatar(:thumb)) %>" alt="" width="24" height="24"><% end %>
+            <%= current_user.email_address %>
+          </a>
+          <%= form_for routes.path(:session), method: :delete, class: "sign-out" do |f| %>
+            <%= f.submit "Sign out", class: "link" %>
+          <% end %>
+        </nav>
+      <% end %>
+    </header>
+
+    <main>
+      <% unless request.path.start_with?("/session", "/passwords") %>
+        <% if flash[:notice] %><p role="status"><%= flash[:notice] %></p><% end %>
+        <% if flash[:alert] %><p role="alert"><%= flash[:alert] %></p><% end %>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>

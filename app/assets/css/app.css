@@ -1,5 +1,80 @@
-body {
-  background-color: #fff;
-  color: #000;
-  font-family: sans-serif;
+:root {
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --line: #e5e5ea;
+  --accent: #8a5a2b;
+  --bg: #fbfaf7;
+  color-scheme: light;
 }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+a { color: var(--accent); }
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.brand { font-weight: 700; text-decoration: none; color: var(--ink); }
+
+.site-header nav { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+.me { display: inline-flex; gap: 0.4rem; align-items: center; }
+.me img { border-radius: 50%; object-fit: cover; }
+
+main { max-width: 56rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+form.sign-out, form.sign-out p { display: inline; margin: 0; }
+
+.link { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; }
+
+[role="status"] { color: #1f6f43; }
+[role="alert"] { color: #b3261e; }
+
+.upload-form {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 2rem;
+}
+
+.upload-form label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+.upload-form small { display: block; color: var(--muted); }
+.upload-form input[type="text"] { width: 100%; max-width: 28rem; padding: 0.4rem; }
+.upload-form progress { width: 100%; max-width: 28rem; }
+form[data-direct-upload-pending] input[type="submit"] { opacity: 0.5; }
+
+.grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+}
+
+.grid img { width: 100%; height: 10rem; object-fit: cover; border-radius: 6px; background: var(--line); }
+.grid p { margin: 0.25rem 0; }
+
+.clips { padding-left: 1.2rem; }
+.clips small { color: var(--muted); margin-left: 0.5rem; }
+
+video { max-width: 100%; height: auto; background: #000; border-radius: 6px; }
+
+.avatar-large img { border-radius: 50%; object-fit: cover; background: var(--line); }
+
+.empty { color: var(--muted); }
