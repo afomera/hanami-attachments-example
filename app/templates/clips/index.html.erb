@@ -4,8 +4,8 @@
   <p>
     <label for="clip-video">Video (MP4, WebM or MOV, up to 2 GB)</label>
     <%= attachment_field f, "clip.video", attachment: video, uploader: Shoebox::Uploaders::VideoUploader, id: "clip-video" %>
-    <progress id="clip-progress" max="100" value="0" hidden></progress>
-    <small id="clip-status" role="status"></small>
+    <progress data-upload-progress max="100" value="0" hidden></progress>
+    <small data-upload-status role="status"></small>
   </p>
   <p>
     <label for="clip-title">Title</label>
@@ -25,14 +25,3 @@
   </ul>
 <% end %>
 
-<script type="module">
-  // Progress for the direct upload, from hanami-attachments' events.
-  const input = document.getElementById("clip-video");
-  const progress = document.getElementById("clip-progress");
-  const status = document.getElementById("clip-status");
-
-  input.addEventListener("direct-upload:start", () => { progress.hidden = false; progress.value = 0; status.textContent = "Uploading…"; });
-  input.addEventListener("direct-upload:progress", ({ detail }) => { progress.value = Math.round((detail.loaded / detail.total) * 100); });
-  input.addEventListener("direct-upload:done", () => { progress.value = 100; status.textContent = "Uploaded. Add a title and save."; });
-  input.addEventListener("direct-upload:error", ({ detail }) => { progress.hidden = true; status.textContent = `Video ${detail.errors.join(", ")}.`; });
-</script>
