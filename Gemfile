@@ -33,6 +33,8 @@ gem "argon2", "~> 2.3"
 
 gem "aws-sdk-s3", "~> 1.0"
 
+gem "image_processing", "~> 1.14"
+
 group :development do
   gem "hanami-webconsole", github: "hanami/hanami-webconsole", branch: "main"
 end

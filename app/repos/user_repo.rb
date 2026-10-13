@@ -25,6 +25,11 @@ module Shoebox
         users.by_pk(id).changeset(:update, password_hash: passwords.digest(password), updated_at: Time.now).commit
       end
 
+      # Saves the avatar attachment's column values (hanami-attachments).
+      def update_avatar(id, values)
+        users.by_pk(id).changeset(:update, values).commit
+      end
+
       private
 
       def normalize_email(email_address)
