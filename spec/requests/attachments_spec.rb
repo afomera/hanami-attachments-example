@@ -164,11 +164,15 @@ RSpec.describe "Attachments", :db, type: :request do
 
       follow_redirect!
       expect(last_response.body).to include %(<video src="/storage/files/)
-      expect(last_response.body).to include "?download=1"
+      expect(last_response.body).to include "&amp;download=1"
 
       get clip.video_url, {}, {"HTTP_RANGE" => "bytes=0-99"}
       expect(last_response.status).to eq 206
       expect(last_response.headers["accept-ranges"]).to eq "bytes"
+
+      # File URLs are signed: dropping or reusing the signature doesn't work.
+      get clip.video_url.sub(/\?sig=[^&]+/, "")
+      expect(last_response.status).to eq 403
     end
 
     it "rejects a renamed file at upload time" do

@@ -18,5 +18,8 @@ module Shoebox
     setting :storage_secret_access_key, default: nil, constructor: Types::String.optional
     setting :storage_public, default: false, constructor: Types::Params::Bool
     setting :storage_cdn_host, default: nil, constructor: Types::String.optional
+
+    # Signs local file URLs (falls back to SESSION_SECRET).
+    setting :storage_url_secret, default: nil, constructor: Types::String.optional
   end
 end
