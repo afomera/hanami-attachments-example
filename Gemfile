@@ -29,6 +29,8 @@ gem "hanami-turbo", "~> 0.1"
 # File attachments. In the :cli group too, so `hanami generate storage` and `attachment` exist.
 gem "hanami-attachments", path: "../hanami-attachments", group: [:default, :cli]
 
+gem "argon2", "~> 2.3"
+
 group :development do
   gem "hanami-webconsole", github: "hanami/hanami-webconsole", branch: "main"
 end

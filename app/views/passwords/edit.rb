@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+module Shoebox
+  module Views
+    module Passwords
+      class Edit < Shoebox::View
+        expose :token
+      end
+    end
+  end
+end
