@@ -2,11 +2,12 @@
 //
 // Enhances file inputs rendered by `attachment_field` for uploaders with `direct_uploads`:
 //
-//   <input type="file" data-direct-upload="/uploads/clip/presign" data-direct-upload-field="clip[cached_video]">
+//   <input type="file" data-direct-upload="/uploads/video/presign" data-direct-upload-field="clip-video-cached">
 //
 // When a file is picked, it's uploaded straight to storage (or to the app, when files are stored
-// locally), its data goes into the hidden field, and the file input stops being submitted, so the
-// form post itself is small. Without JavaScript the form still works as a normal upload.
+// locally), its data goes into the hidden field (found by the id in data-direct-upload-field), and
+// the file input stops being submitted, so the form post itself is small. Without JavaScript the
+// form still works as a normal upload.
 //
 // Events, dispatched on the file input (they bubble):
 //
@@ -109,8 +110,7 @@ document.addEventListener("change", async (event) => {
   if (!file) return;
 
   const form = input.form;
-  const fieldName = input.dataset.directUploadField;
-  const field = form && fieldName ? form.querySelector(`input[type=hidden][name="${CSS.escape(fieldName)}"]`) : null;
+  const field = input.dataset.directUploadField ? document.getElementById(input.dataset.directUploadField) : null;
 
   // Keep the chosen file visible, but don't submit its bytes again with the form.
   if (input.name) input.dataset.directUploadName = input.name;
