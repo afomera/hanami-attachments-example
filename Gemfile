@@ -24,6 +24,11 @@ gem "puma", ">= 7.1"
 gem "rake"
 gem "sqlite3"
 
+gem "hanami-turbo", "~> 0.1"
+
+# File attachments. In the :cli group too, so `hanami generate storage` and `attachment` exist.
+gem "hanami-attachments", path: "../hanami-attachments", group: [:default, :cli]
+
 group :development do
   gem "hanami-webconsole", github: "hanami/hanami-webconsole", branch: "main"
 end
@@ -35,6 +40,7 @@ group :development, :test do
 end
 
 group :cli, :development do
+  gem "hanami-auth", path: "../hanami-auth"
   gem "hanami-reloader", github: "hanami/hanami-reloader", branch: "main"
 end
 

@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@hotwired/turbo": "^8.0.23",
     "esbuild": "^0.28.1",
     "hanami-assets": "hanami/assets-js#main"
   }
