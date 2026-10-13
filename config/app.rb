@@ -2,6 +2,7 @@
 
 require "hanami"
 require "hanami/turbo"
+require "hanami/attachments"
 
 module Shoebox
   class App < Hanami::App
@@ -13,5 +14,8 @@ module Shoebox
       httponly: true,
       secure: Hanami.env?(:production)
     }
+
+    # Uploaders are classes, not components (hanami-attachments).
+    config.no_auto_register_paths += ["uploaders"]
   end
 end

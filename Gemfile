@@ -31,6 +31,8 @@ gem "hanami-attachments", path: "../hanami-attachments", group: [:default, :cli]
 
 gem "argon2", "~> 2.3"
 
+gem "aws-sdk-s3", "~> 1.0"
+
 group :development do
   gem "hanami-webconsole", github: "hanami/hanami-webconsole", branch: "main"
 end

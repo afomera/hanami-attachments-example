@@ -4,6 +4,7 @@
 module Shoebox
   module Views
     module Helpers
+      include Hanami::Attachments::Helpers
       # Add your view helpers here
     end
   end

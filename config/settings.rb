@@ -8,5 +8,15 @@ module Shoebox
     # Define your app settings here, for example:
     #
     # setting :my_flag, default: false, constructor: Types::Params::Bool
+
+    # File storage for attachments (hanami-attachments). See .env for the S3 settings.
+    setting :storage_service, default: Hanami.env?(:production) ? "s3" : "file_system", constructor: Types::String
+    setting :storage_bucket, default: nil, constructor: Types::String.optional
+    setting :storage_region, default: nil, constructor: Types::String.optional
+    setting :storage_endpoint, default: nil, constructor: Types::String.optional
+    setting :storage_access_key_id, default: nil, constructor: Types::String.optional
+    setting :storage_secret_access_key, default: nil, constructor: Types::String.optional
+    setting :storage_public, default: false, constructor: Types::Params::Bool
+    setting :storage_cdn_host, default: nil, constructor: Types::String.optional
   end
 end
